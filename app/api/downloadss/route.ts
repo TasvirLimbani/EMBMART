@@ -1,40 +1,43 @@
-// app/api/download/route.ts
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-// Simulate a database function
-async function addDownloadToDB(download: any) {
-  // Replace this with your actual DB logic
-  console.log("Download saved:", download);
-  return { success: true, downloadId: Date.now() };
-}
-
-export async function POST(req: NextRequest) {
+export async function POST(req: Request) {
   try {
     const body = await req.json();
 
     // Validate required fields
-    const requiredFields = ["user_id", "product_id", "product_name"];
-    for (const field of requiredFields) {
-      if (!body[field]) {
-        return NextResponse.json(
-          { error: `Missing required field: ${field}` },
-          { status: 400 }
-        );
-      }
+    if (!body.user_id || !body.product_id || !body.product_name) {
+      return NextResponse.json(
+        { status: false, message: "Missing required fields" },
+        { status: 400 }
+      );
     }
 
-    // Save the download record (replace with real DB logic)
-    const result = await addDownloadToDB(body);
+    // Send raw JSON to PHP API
+    const response = await fetch(
+      "http://embmart.soon.it/product/adddownload.php",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user_id: body.user_id,
+          product_id: body.product_id,
+          product_name: body.product_name,
+          product_category: body.product_category,
+          product_image: body.product_image,
+        }),
+      }
+    );
 
-    return NextResponse.json({
-      status: "success",
-      message: "Download recorded successfully",
-      data: result,
-    });
+    const data = await response.json();
+
+    return NextResponse.json(data);
   } catch (error) {
-    console.error("Error recording download:", error);
+    console.error("Download Proxy Error:", error);
+
     return NextResponse.json(
-      { status: "error", message: "Failed to record download" },
+      { status: false, message: "Server Error" },
       { status: 500 }
     );
   }
