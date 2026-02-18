@@ -72,7 +72,7 @@ export function AuthModal() {
         setError("Invalid email or password")
       } else {
         // ✅ Fetch full user details
-        const userRes = await fetch(`http://embmart.soon.it/auth/userdetail.php?id=${data.user_id}`);
+        const userRes = await fetch(`/api/userdetail?id=${data.user_id}`);
         const userData = await userRes.json();
 
         if (!userRes.ok || userData.status === false) {
