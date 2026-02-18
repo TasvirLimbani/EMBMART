@@ -8,11 +8,11 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { 
-  ChevronRight, 
-  Mail, 
-  Phone, 
-  MapPin, 
+import {
+  ChevronRight,
+  Mail,
+  Phone,
+  MapPin,
   Clock,
   Send,
   Loader2,
@@ -32,10 +32,10 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
-    
+
     // Simulate form submission
     await new Promise((resolve) => setTimeout(resolve, 1500))
-    
+
     setIsSubmitting(false)
     setIsSubmitted(true)
     setFormData({ name: "", email: "", subject: "", message: "" })
@@ -60,7 +60,7 @@ export default function ContactPage() {
       <div className="container mx-auto px-4 py-8 text-center">
         <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Get in Touch</h1>
         <p className="text-muted-foreground max-w-2xl mx-auto">
-          Have questions about our embroidery designs or need help with your order? 
+          Have questions about our embroidery designs or need help with your order?
           We are here to assist you. Reach out to us using the form below or through our contact details.
         </p>
       </div>
@@ -93,7 +93,7 @@ export default function ContactPage() {
                   <h3 className="font-semibold text-foreground mb-1">Call Us</h3>
                   <p className="text-muted-foreground text-sm mb-2">Mon-Fri from 9am to 6pm</p>
                   <a href="tel:+1234567890" className="text-primary hover:underline">
-                    +91 96649 17815
+                    +91 97235 53038
                   </a>
                 </div>
               </div>
@@ -107,6 +107,7 @@ export default function ContactPage() {
                 <div>
                   <h3 className="font-semibold text-foreground mb-1">Visit Us</h3>
                   <p className="text-muted-foreground text-sm">
+                    Radhe Software Solutions<br />
                     C2-1215 IT PARK<br />
                     Mota Varachha, Surat<br />
                     Gujarat, India.
@@ -124,7 +125,7 @@ export default function ContactPage() {
                   <h3 className="font-semibold text-foreground mb-1">Business Hours</h3>
                   <p className="text-muted-foreground text-sm">
                     Monday - Friday: 9:00 AM - 6:00 PM<br />
-                    Saturday: 10:00 AM - 4:00 PM<br />
+                    Saturday: 9:00 AM - 1:00 PM<br />
                     Sunday: Closed
                   </p>
                 </div>
@@ -136,7 +137,7 @@ export default function ContactPage() {
           <div className="lg:col-span-2">
             <div className="bg-card rounded-xl p-6 md:p-8 shadow-sm">
               <h2 className="text-2xl font-semibold text-foreground mb-6">Send us a Message</h2>
-              
+
               {isSubmitted ? (
                 <div className="text-center py-12">
                   <div className="h-16 w-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
@@ -203,8 +204,8 @@ export default function ContactPage() {
                       required
                     />
                   </div>
-                  <Button 
-                    type="submit" 
+                  <Button
+                    type="submit"
                     className="w-full sm:w-auto bg-primary text-primary-foreground"
                     disabled={isSubmitting}
                   >

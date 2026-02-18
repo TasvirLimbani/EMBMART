@@ -206,7 +206,7 @@ export function Footer() {
         {/* BOTTOM */}
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-background/10 pt-8 md:flex-row">
           <p className="text-sm text-background/70">
-            © {new Date().getFullYear()} EmbMart. All rights reserved.
+            © 2025 EmbMart All rights reserved By Radhe Software Solutions.
           </p>
 
           <div className="flex gap-4">
