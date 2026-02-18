@@ -4,7 +4,7 @@ import { NextResponse } from "next/server"
 export const runtime = "nodejs"
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
-   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL! || "http://localhost:3000"
+   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL! || "https://embmart.vercel.app/"
 export async function POST(req: Request) {
   try {
     const { items, userId } = await req.json()
