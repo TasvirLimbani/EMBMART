@@ -56,7 +56,7 @@ export function AuthModal() {
     setIsLoading(true)
 
     try {
-      const res = await fetch("http://embmart.soon.it/auth/login.php", {
+      const res = await fetch("/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
