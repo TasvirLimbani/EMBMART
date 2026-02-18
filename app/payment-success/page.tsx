@@ -287,7 +287,7 @@ export default function PaymentSuccessPage() {
                     })
 
                     // Save order
-                    await fetch("http://embmart.soon.it/product/addorder.php", {
+                    await fetch("/api/order", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
@@ -302,7 +302,7 @@ export default function PaymentSuccessPage() {
                     })
 
                     // Add download
-                    await fetch("http://embmart.soon.it/product/adddownload.php", {
+                    await fetch("/api/downloadss", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
