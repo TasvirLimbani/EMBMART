@@ -11,16 +11,16 @@ interface SafeImageProps {
 
 export function SafeImage({ src, alt, className }: SafeImageProps) {
     const [imgSrc, setImgSrc] = useState(src)
-
+    console.log("category-small-machines.jpg===", imgSrc)
     return (
         <Image
             src={'http://embmart.soon.it/' + imgSrc.trim()}
             alt={alt}
             fill
             className={className}
-            onError={() => {
-                setImgSrc("/images/category-small-machines.jpg") // fallback image
-            }}
+        // onError={() => {
+        //     setImgSrc("/images/category-small-machines.jpg") // fallback image
+        // }}
         />
     )
 }
