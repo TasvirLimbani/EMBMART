@@ -1,40 +1,78 @@
-// app/api/order/route.ts
 import { NextRequest, NextResponse } from "next/server";
 
-// Simulate a database function
-async function addOrderToDB(order: any) {
-  // Replace this with your real DB logic
-  console.log("Order saved:", order);
-  return { success: true, orderId: Date.now() };
+// Example DB insert function (replace with real DB logic)
+async function insertOrder(data: {
+  user_id: number;
+  product_id: number;
+  product_name: string;
+  product_category: string;
+  product_image: string;
+  quantity: number;
+}) {
+  // TODO: replace with MySQL / Prisma / Mongo insert
+  console.log("Order received:", data);
+
+  return {
+    order_id: Date.now(), // mock order id
+  };
 }
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
 
-    // Validate required fields
-    const requiredFields = ["user_id", "product_id", "product_name", "quantity", "session_id"];
-    for (const field of requiredFields) {
-      if (!body[field]) {
-        return NextResponse.json(
-          { error: `Missing required field: ${field}` },
-          { status: 400 }
-        );
-      }
+    const {
+      user_id,
+      product_id,
+      product_name,
+      product_category,
+      product_image,
+      quantity,
+    } = body;
+
+    // ✅ Validation
+    if (
+      !user_id ||
+      !product_id ||
+      !product_name ||
+      !product_category ||
+      !quantity
+    ) {
+      return NextResponse.json(
+        {
+          status: "error",
+          message: "Missing required fields",
+        },
+        { status: 400 }
+      );
     }
 
-    // Save the order (replace with real DB logic)
-    const result = await addOrderToDB(body);
-
-    return NextResponse.json({
-      status: "success",
-      message: "Order added successfully",
-      data: result,
+    // ✅ Save order
+    const result = await insertOrder({
+      user_id,
+      product_id,
+      product_name,
+      product_category,
+      product_image: product_image || "",
+      quantity,
     });
-  } catch (error) {
-    console.error("Error adding order:", error);
+
     return NextResponse.json(
-      { status: "error", message: "Failed to add order" },
+      {
+        status: "success",
+        message: "Order added successfully",
+        data: result,
+      },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Order API error:", error);
+
+    return NextResponse.json(
+      {
+        status: "error",
+        message: "Internal server error",
+      },
       { status: 500 }
     );
   }
