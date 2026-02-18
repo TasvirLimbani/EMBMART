@@ -129,7 +129,8 @@ export function AuthModal() {
         password: registerPassword,
       }
 
-      const res = await fetch("http://embmart.soon.it/auth/signup.php", {
+      const res = await fetch("/api/signup", {
+
         method: "POST",
         headers: {
           "Content-Type": "application/json", // ✅ RAW JSON
