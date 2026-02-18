@@ -6,6 +6,9 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-}
+  images: {
+    domains: ["embmart.soon.it"],
+  },
+};
 
-export default nextConfig
+export default nextConfig;
