@@ -83,39 +83,15 @@
 
 
 
+
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
   try {
+    // Read body sent from frontend
     const body = await req.json();
 
-    const {
-      user_id,
-      product_id,
-      product_name,
-      product_category,
-      product_image,
-      quantity,
-    } = body;
-
-    // ✅ Validation
-    if (
-      !user_id ||
-      !product_id ||
-      !product_name ||
-      !product_category ||
-      !quantity
-    ) {
-      return NextResponse.json(
-        {
-          status: false,
-          message: "Missing required fields",
-        },
-        { status: 400 }
-      );
-    }
-
-    // ✅ Send JSON to PHP API
+    // Forward request to PHP API
     const response = await fetch(
       "http://embmart.soon.it/product/addorder.php",
       {
@@ -124,42 +100,27 @@ export async function POST(req: NextRequest) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          user_id,
-          product_id,
-          product_name,
-          product_category,
-          product_image: product_image || "",
-          quantity,
+          user_id: body.user_id,
+          product_id: body.product_id,
+          product_name: body.product_name,
+          product_category: body.product_category,
+          product_image: body.product_image,
+          quantity: body.quantity,
         }),
       }
     );
 
-    const text = await response.text();
+    const data = await response.json();
 
-    // If PHP returns invalid JSON, prevent crash
-    let data;
-    try {
-      data = JSON.parse(text);
-    } catch {
-      return NextResponse.json(
-        {
-          status: false,
-          message: "Invalid response from PHP API",
-          raw: text,
-        },
-        { status: 500 }
-      );
-    }
-
+    // Return PHP API response to frontend
     return NextResponse.json(data, { status: 200 });
-
   } catch (error) {
-    console.error("Order API Proxy Error:", error);
+    console.error("Order proxy error:", error);
 
     return NextResponse.json(
       {
-        status: false,
-        message: "Internal server error",
+        status: "error",
+        message: "Order API failed",
       },
       { status: 500 }
     );
