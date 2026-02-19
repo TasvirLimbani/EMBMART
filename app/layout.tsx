@@ -68,7 +68,7 @@ import { AuthProvider } from "@/lib/auth-context"
 import { AuthModal } from "@/components/auth-modal"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-// import DevToolsBlocker from "./DevToolsBlocker"   // ✅ ADDED
+import DevToolsBlocker from "./DevToolsBlocker"   // ✅ ADDED
 import './globals.css'
 
 const _geist = Geist({ subsets: ["latin"] })
@@ -95,7 +95,7 @@ export default function RootLayout({
       <body className="font-sans antialiased">
 
         {/* ✅ INSPECT BLOCKER */}
-        {/* <DevToolsBlocker /> */}
+        <DevToolsBlocker />
 
         <AuthProvider>
           <CartProvider>
