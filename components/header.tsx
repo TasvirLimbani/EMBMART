@@ -146,7 +146,7 @@ export function Header() {
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={logout} className="text-destructive">
-                  <LogOut className="mr-2 h-4 w-4" />
+                  <LogOut className="mr-2 h-4 w-4 text-red" />
                   Logout
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -168,30 +168,50 @@ export function Header() {
           {/* Mobile Menu */}
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild className="lg:hidden">
-              <Button variant="ghost" size="icon" className="text-foreground">
+              <Button variant="ghost" size="icon" className="rounded-full">
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-80 bg-card">
-              <SheetTitle className="text-foreground">Navigation</SheetTitle>
-              <nav className="mt-8 flex flex-col gap-4">
+
+            <SheetContent
+              side="right"
+              className="w-80 border-l bg-background/95 backdrop-blur-xl"
+            >
+              {/* <SheetTitle className="text-xl font-semibold">
+                Navigation
+              </SheetTitle> */}
+
+              <nav className="mt-6 flex flex-col gap-2">
                 {navLinks.map((link) => (
-                  <div key={link.name}>
+                  <div key={link.name} className="space-y-1">
                     <Link
                       href={link.href}
-                      className="text-lg font-medium text-foreground hover:text-primary"
                       onClick={() => !link.submenu && setIsOpen(false)}
+                      className="
+              flex items-center justify-between
+              rounded-xl px-4 py-3
+              text-base font-medium
+              transition
+              hover:bg-muted
+              active:scale-[0.98]
+            "
                     >
                       {link.name}
                     </Link>
+
                     {link.submenu && (
-                      <div className="mt-2 ml-4 flex flex-col gap-2">
+                      <div className="ml-4 border-l border-muted pl-4 space-y-1">
                         {link.submenu.map((sublink) => (
                           <Link
                             key={sublink.name}
                             href={sublink.href}
-                            className="text-muted-foreground hover:text-primary"
                             onClick={() => setIsOpen(false)}
+                            className="
+                    block rounded-lg px-3 py-2
+                    text-sm text-muted-foreground
+                    transition
+                    hover:bg-muted hover:text-foreground
+                  "
                           >
                             {sublink.name}
                           </Link>
@@ -200,32 +220,45 @@ export function Header() {
                     )}
                   </div>
                 ))}
-
-                {/* Mobile Currency Selector */}
-                <div className="mt-4 pt-4 border-t border-border">
-                  <p className="text-sm text-muted-foreground mb-2">Currency</p>
-                  <div className="flex gap-2">
-                    {currencies.map((curr) => (
-                      <Button
-                        key={curr}
-                        variant={currency === curr ? "default" : "outline"}
-                        size="sm"
-                        onClick={() => setCurrency(curr)}
-                        className={currency === curr ? "bg-primary text-primary-foreground" : "bg-transparent"}
-                      >
-                        {curr}
-                      </Button>
-                    ))}
-                  </div>
-                </div>
-
-                <Button className="mt-4 w-full bg-primary text-primary-foreground">
-                  <Download className="mr-2 h-4 w-4" />
-                  Install App
-                </Button>
               </nav>
+
+              {/* Currency Selector */}
+              <div className="mt-6 rounded-xl border bg-muted/50 p-4 mr-2 ml-2">
+                <p className="mb-3 text-xs font-medium uppercase text-muted-foreground">
+                  Currency
+                </p>
+                <div className="flex gap-2 flex-wrap">
+                  {currencies.map((curr) => (
+                    <Button
+                      key={curr}
+                      size="sm"
+                      variant={currency === curr ? "default" : "outline"}
+                      onClick={() => setCurrency(curr)}
+                      className="rounded-full px-4"
+                    >
+                      {curr}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Install App CTA */}
+              <Button
+                size="lg"
+                className="
+        mt-6 w-full rounded-xl
+        bg-primary text-primary-foreground
+        shadow-lg
+        hover:shadow-xl
+        
+      "
+              >
+                <Download className="mr-2 h-4 w-4" />
+                Install App
+              </Button>
             </SheetContent>
           </Sheet>
+
         </div>
       </div>
     </header>

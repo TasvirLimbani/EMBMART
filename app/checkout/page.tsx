@@ -320,97 +320,12 @@ export default function CheckoutPage() {
                 </div>
               </div>
 
-              {/* Payment Method */}
-              {/* <div className="bg-card rounded-xl p-6 shadow-sm">
-                <h2 className="text-xl font-semibold text-foreground mb-4">Payment Method</h2>
-                <RadioGroup value={paymentMethod} onValueChange={setPaymentMethod} className="space-y-3">
-                  <div className={`flex items-center gap-4 p-4 rounded-lg border transition ${paymentMethod === "card" ? "border-primary bg-primary/5" : "border-border"}`}>
-                    <RadioGroupItem value="card" id="card" />
-                    <Label htmlFor="card" className="flex items-center gap-3 flex-1 cursor-pointer">
-                      <CreditCard className="h-5 w-5 text-primary" />
-                      <span className="text-foreground">Credit / Debit Card</span>
-                    </Label>
-                    <div className="flex gap-2">
-                      <div className="h-6 w-10 bg-blue-600 rounded text-white text-xs flex items-center justify-center font-bold">VISA</div>
-                      <div className="h-6 w-10 bg-red-500 rounded text-white text-xs flex items-center justify-center font-bold">MC</div>
-                    </div>
-                  </div>
-                  <div className={`flex items-center gap-4 p-4 rounded-lg border transition ${paymentMethod === "paypal" ? "border-primary bg-primary/5" : "border-border"}`}>
-                    <RadioGroupItem value="paypal" id="paypal" />
-                    <Label htmlFor="paypal" className="flex items-center gap-3 flex-1 cursor-pointer">
-                      <Wallet className="h-5 w-5 text-blue-500" />
-                      <span className="text-foreground">PayPal</span>
-                    </Label>
-                  </div>
-                </RadioGroup>
-
-                {paymentMethod === "card" && (
-                  <div className="mt-6 space-y-4">
-                    <div>
-                      <Label htmlFor="cardNumber" className="text-foreground">Card Number</Label>
-                      <Input
-                        id="cardNumber"
-                        name="cardNumber"
-                        value={formData.cardNumber}
-                        onChange={handleInputChange}
-                        placeholder="1234 5678 9012 3456"
-                        className="mt-1 bg-background"
-                        required
-                      />
-                    </div>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <Label htmlFor="expiry" className="text-foreground">Expiry Date</Label>
-                        <Input
-                          id="expiry"
-                          name="expiry"
-                          value={formData.expiry}
-                          onChange={handleInputChange}
-                          placeholder="MM/YY"
-                          className="mt-1 bg-background"
-                          required
-                        />
-                      </div>
-                      <div>
-                        <Label htmlFor="cvv" className="text-foreground">CVV</Label>
-                        <Input
-                          id="cvv"
-                          name="cvv"
-                          value={formData.cvv}
-                          onChange={handleInputChange}
-                          placeholder="123"
-                          className="mt-1 bg-background"
-                          required
-                        />
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div> */}
-
               {/* Security Notice */}
               <div className="flex items-center gap-3 p-4 bg-green-50 rounded-lg text-green-800">
                 <ShieldCheck className="h-5 w-5 flex-shrink-0" />
                 <p className="text-sm">Your payment information is encrypted and secure. We never store your card details.</p>
               </div>
 
-              {/* <Button
-                type="submit"
-                className="w-full bg-primary text-primary-foreground py-6 text-lg"
-                disabled={isProcessing}
-              >
-                {isProcessing ? (
-                  <>
-                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                    Processing Payment...
-                  </>
-                ) : (
-                  <>
-                    <Lock className="mr-2 h-5 w-5" />
-                    Pay {formatPrice(finalTotal)}
-                  </>
-                )}
-              </Button> */}
               <Button
                 type="button"
                 onClick={handlePay}
