@@ -158,7 +158,7 @@ export default function ProductDetailsPage({ params }: { params: Promise<{ id: s
               <span className="text-3xl font-bold text-primary">{formatPrice(Number(design.price))}</span>
               {Number(design.price) && (
                 <span className="text-xl text-muted-foreground line-through">
-                  {formatPrice(Number(design.price))}
+                  {formatPrice(Number(design.price) * 1.5)}
                 </span>
               )}
             </div>
